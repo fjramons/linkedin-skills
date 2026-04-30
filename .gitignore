@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.chrome_profile/
+output/
+*.pyc
+.env
+config.toml
+config.toml.bak
+.vscode/

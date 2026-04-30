@@ -1,0 +1,11 @@
+[settings]
+max_jobs_per_alert = 10
+
+[delays]
+avg_wait_seconds = 60
+wait_variance = 30
+
+[[alerts]]
+name = "Cloud Architect"
+keywords = "Cloud Architect"
+location = "Madrid, Spain"
