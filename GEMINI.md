@@ -20,6 +20,12 @@ Automatically scrape the top _N_ job descriptions for multiple job alerts and sa
   - `--dry-run`: Full navigation test that prints titles/companies without downloading data.
   - Normal Run: Performs full metadata and description extraction.
 
+### 3. Skill Extraction (`processor.py`)
+- **Master Skill List**: Uses `db/master_skills.yaml` to normalize skill names (e.g., "Python 3" -> "Python").
+- **NLP Extraction**: Scans descriptions using the master list. Detects "optional" skills based on context (e.g., "plus", "bonus").
+- **Sync Mode**: Use `--sync-skills` with a Gemini API key to update the master list from current job samples.
+- **Idempotency**: Checks `job_id` in `db/*.yaml` to skip already processed jobs.
+
 ## Engineering Standards
 
 ### Idempotency

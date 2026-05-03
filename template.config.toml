@@ -5,6 +5,10 @@ max_jobs_per_alert = 10
 avg_wait_seconds = 60
 wait_variance = 30
 
+[processor]
+gemini_api_key = ""
+sample_size_for_discovery = 5
+
 [[alerts]]
 name = "Cloud Architect"
 keywords = "Cloud Architect"

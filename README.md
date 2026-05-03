@@ -10,6 +10,7 @@ This tool automates the process of visiting each of your LinkedIn job alerts, ex
 - **Anti-Detection**: Randomized human-like delays (averaging 1 minute) to protect your account.
 - **Idempotency**: Skips jobs you have already downloaded.
 - **Organized Output**: Organizes jobs into folders by alert name.
+- **Skill Extraction**: Automatically identifies and normalizes skills from job descriptions, saving them to YAML files in `db/`.
 
 ## Installation
 
@@ -80,6 +81,14 @@ Scrape job descriptions:
 ```bash
 uv run python scraper.py
 ```
+
+### Skill Extraction
+Process downloaded job descriptions and extract normalized skills:
+```bash
+uv run python processor.py
+```
+- Results are saved to `db/<Alert_Name>.yaml`.
+- Use `--sync-skills` to update the master skill list using an LLM (requires API key in `config.toml`).
 
 ## Output Format
 
