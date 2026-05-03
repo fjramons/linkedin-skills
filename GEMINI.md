@@ -26,6 +26,14 @@ Automatically scrape the top _N_ job descriptions for multiple job alerts and sa
 - **Sync Mode**: Use `--sync-skills` with a Gemini API key to update the master list from current job samples.
 - **Idempotency**: Checks `job_id` in `db/*.yaml` to skip already processed jobs.
 
+### 4. Skill Analysis (`analyzer.py`)
+- **Data Source**: Aggregates all job data from the `db/` folder. Implements ID-based deduplication to ensure accurate penetration percentages (avoiding >100%).
+- **Static Reports**: Generates PNG charts in `analysis/static/` for demand, co-occurrence, trends, and faceted alert comparisons.
+- **Dynamic Dashboards**: 
+  - `skill_dashboard.html`: Fully dynamic view with client-side filtering by **Alert** and **Date Range** (Start/End). Supports "Optional" toggle via legend.
+  - `alert_comparison.html`: Faceted side-by-side comparison of all alerts with percentage labels.
+- **Filtering**: Supports both interactive HTML controls and CLI filters.
+
 ## Engineering Standards
 
 ### Idempotency

@@ -8,3 +8,4 @@ config.toml
 config.toml.bak
 .vscode/
 /db/
+/analysis/

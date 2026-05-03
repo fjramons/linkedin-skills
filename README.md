@@ -11,6 +11,7 @@ This tool automates the process of visiting each of your LinkedIn job alerts, ex
 - **Idempotency**: Skips jobs you have already downloaded.
 - **Organized Output**: Organizes jobs into folders by alert name.
 - **Skill Extraction**: Automatically identifies and normalizes skills from job descriptions, saving them to YAML files in `db/`.
+- **Statistical Analysis**: Generates static and interactive visualizations of skill demand, co-occurrence, and trends.
 
 ## Installation
 
@@ -90,6 +91,19 @@ uv run python processor.py
 - Results are saved to `db/<Alert_Name>.yaml`.
 - Use `--sync-skills` to update the master skill list using an LLM (requires API key in `config.toml`).
 
+### Analyzing Skills
+
+Generate statistical reports and interactive charts:
+
+```bash
+uv run python analyzer.py
+```
+
+- **Static Charts**: Saved to `analysis/static/` (PNG). Includes trend lines, co-occurrence heatmaps, and faceted alert comparisons.
+- **Dynamic Dashboard**: `analysis/interactive/skill_dashboard.html` allows real-time filtering by **Job Alert** and **Date Range** (Start/End dropdowns).
+- **Faceted Comparison**: Interactive side-by-side alert analysis in `analysis/interactive/alert_comparison.html`.
+- **Filtering**: Use `--alert`, `--start-date`, and `--end-date` to scope the analysis via command line.
+
 ## Output Format
 
 Job descriptions are saved in the `output/` folder, organized by alert name and date. Each file follows this strict Markdown format:
@@ -103,6 +117,18 @@ Job descriptions are saved in the `output/` folder, organized by alert name and 
 - **Posted**: [Date]
 - **Job ID**: [ID]
 - **URL**: <[LinkedIn URL]>
+
+## Description
+
+[Cleaned Job Description]
+```
+
+## Technical Notes
+
+- Data is saved in the `output/` folder.
+- The browser session is stored in `.chrome_profile/`.
+- Both folders are ignored by Git.
+*URL**: <[LinkedIn URL]>
 
 ## Description
 

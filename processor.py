@@ -141,28 +141,39 @@ class JobProcessor:
         found_skills = []
         text_lower = text.lower()
         
+        # Track found skill names to ensure uniqueness per job
+        seen_skills = set()
+        
         for skill_info in self.master_skills:
             name = skill_info['name']
+            if name in seen_skills:
+                continue
+                
             aliases = [name] + skill_info.get('aliases', [])
             
             for alias in aliases:
-                # Use word boundaries to avoid partial matches (e.g., 'Go' in 'Google')
+                # Use word boundaries
                 pattern = r'\b' + re.escape(alias.lower()) + r'\b'
                 match = re.search(pattern, text_lower)
                 
                 if match:
                     # Check for "optional" context around the match
-                    # Search ~50 chars before the match
-                    start = max(0, match.start() - 50)
+                    # Search ~80 chars before the match (increased window)
+                    start = max(0, match.start() - 80)
                     context = text_lower[start:match.start()]
                     
-                    optional_keywords = ["plus", "desirable", "bonus", "preferred", "optional", "nice to have", "advantage"]
+                    optional_keywords = [
+                        "plus", "desirable", "bonus", "preferred", "optional", "nice to have", "advantage",
+                        "valorará", "valorara", "deseable", "deseamos", "plus", "extra", "preferible", "ventaja",
+                        "conocimientos de", "conocimiento de" # Sometimes indicate non-core
+                    ]
                     is_optional = any(ok in context for ok in optional_keywords)
                     
                     found_skills.append({
                         "name": name,
                         "optional": is_optional
                     })
+                    seen_skills.add(name)
                     break # Found this skill, move to next in master list
                     
         return found_skills
